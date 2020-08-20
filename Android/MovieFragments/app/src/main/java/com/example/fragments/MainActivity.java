@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         // Reference AndroidX FragmentTransaction, FragmentManager
         // FragmentManager helps add/remove/swap fragments from the Activity's ViewGroup
         // It is an interface for interacting with Fragments within an activity
@@ -40,16 +39,31 @@ public class MainActivity extends AppCompatActivity {
                 .commit(); // Schedules commit to main thread queue
 
         Toast.makeText(getBaseContext(), "Main Activity Started", Toast.LENGTH_LONG).show();
+    }
 
-        // Get the intent, verify the action and get the query
-        Intent intent = getIntent();
+    /** Intent Functions/Handlers
+     * REFERENCE https://developer.android.com/training/search/setup#create-sc
+     * @param intent -> Search Query from Activity
+     */
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        handleIntent(intent);
+    }
+
+    private void handleIntent(Intent intent) {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
-            performSearch(query);
-            Log.d("Query", "Query working (sorta)");
+            //use the query to search your data somehow
+            Toast.makeText(getBaseContext(), "Query: " + query, Toast.LENGTH_SHORT).show();
+            Log.d("Query", "Query: " + query);
+
+            // TODO Perform GET request, Send Results to MovieContent.ITEMS & Update RV
         }
     }
 
+    // Options Menu & Item Handlers
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -62,14 +76,6 @@ public class MainActivity extends AppCompatActivity {
         SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 
-        /*
-        // Get the SearchView and set the searchable configuration
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) menu.findItem(R.id.searchBar).getActionView();
-        // Assumes current activity is the searchable activity
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        searchView.setIconifiedByDefault(false); // Do not iconify the widget; expand it by default
-        */
         return true;
     }
 
@@ -79,10 +85,6 @@ public class MainActivity extends AppCompatActivity {
             Log.d("Query", "Query/Search item selected");
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private void performSearch(String query) {
-        Toast.makeText(getBaseContext(), "Query: " + query, Toast.LENGTH_LONG).show();
     }
 
 
