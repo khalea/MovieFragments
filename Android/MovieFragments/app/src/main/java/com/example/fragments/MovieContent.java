@@ -10,7 +10,19 @@ import java.util.List;
 
 public class MovieContent {
 
-    public static final List<Movie> ITEMS = new ArrayList<>();
+    private static final List<Movie> ITEMS = new ArrayList<>();
+
+    public static List<Movie> getITEMS() {
+        return ITEMS;
+    }
+
+    public static void addItem(Movie movie) {
+        ITEMS.add(movie);
+    }
+
+    public static void clearItems() {
+        ITEMS.clear();
+    }
 
     static {
         ITEMS.add(new Movie("The Double",
