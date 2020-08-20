@@ -31,8 +31,8 @@ public class MovieRVAdapter extends RecyclerView.Adapter<MovieRVAdapter.ViewHold
     // RVAdapters should implement ViewHolder & add fields to cache View.findviewbyid results
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public final View mView;
-        public final TextView businessNameView;
-        public final TextView businessBioView;
+        public final TextView movieTitleView;
+        public final TextView movieOverviewView;
         public Movie mItem;
 
         private final ViewHolderListener viewHolderListener;
@@ -42,8 +42,8 @@ public class MovieRVAdapter extends RecyclerView.Adapter<MovieRVAdapter.ViewHold
             super(view);
             mView = view;
             // Locate textviews for items in the List
-            businessNameView = (TextView) view.findViewById(R.id.item_name);
-            businessBioView = (TextView) view.findViewById(R.id.item_bio);
+            movieTitleView = (TextView) view.findViewById(R.id.item_name);
+            movieOverviewView = (TextView) view.findViewById(R.id.item_bio);
             // Set/bind viewholderlistener
             this.viewHolderListener = viewHolderListener;
             itemView.findViewById(R.id.item_row).setOnClickListener(this);
@@ -51,7 +51,7 @@ public class MovieRVAdapter extends RecyclerView.Adapter<MovieRVAdapter.ViewHold
 
         @Override
         public String toString() {
-            return super.toString() + " '" + businessBioView.getText() + "'";
+            return super.toString() + " '" + movieOverviewView.getText() + "'";
         }
 
         @Override
@@ -63,11 +63,11 @@ public class MovieRVAdapter extends RecyclerView.Adapter<MovieRVAdapter.ViewHold
     private static class ViewHolderListenerImpl implements ViewHolderListener {
 
         private Fragment fragment;
-        private List<Movie> businesses;
+        private List<Movie> movies;
 
-        public ViewHolderListenerImpl(Fragment fragment, List<Movie> businesses) {
+        public ViewHolderListenerImpl(Fragment fragment, List<Movie> movies) {
             this.fragment = fragment;
-            this.businesses = businesses;
+            this.movies = movies;
         }
 
         // Handles clicks on rows by setting current posn in MainActivty to given
@@ -77,13 +77,13 @@ public class MovieRVAdapter extends RecyclerView.Adapter<MovieRVAdapter.ViewHold
         public void onItemClicked(View view, int adapterPosition) {
             // Update position in MainActivity
             MainActivity.currentPosn = adapterPosition;
-            MainActivity.currentBusiness = businesses.get(adapterPosition);
-            // On Click, open a new DetailView for the given business
+            MainActivity.currentMovie = movies.get(adapterPosition);
+            // On Click, open a new DetailView for the given Movie
             // TODO pass data into new detail view
 
             DetailFragment detail = new DetailFragment();
             Bundle args = new Bundle();
-            args.putString("Business", String.valueOf(businesses.get(MainActivity.currentPosn)));
+            args.putString("Movie", String.valueOf(movies.get(MainActivity.currentPosn)));
             detail.setArguments(args);
 
             assert fragment.getFragmentManager() != null;
@@ -114,8 +114,8 @@ public class MovieRVAdapter extends RecyclerView.Adapter<MovieRVAdapter.ViewHold
         // Bind data to row/viewholder
         // Set text for items in the List
         holder.mItem = mValues.get(position);
-        holder.businessNameView.setText(mValues.get(position).getMovieTitle());
-        holder.businessBioView.setText(mValues.get(position).getMovieOverview());
+        holder.movieTitleView.setText(mValues.get(position).getMovieTitle());
+        holder.movieOverviewView.setText(mValues.get(position).getMovieOverview());
     }
 
     @Override

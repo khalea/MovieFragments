@@ -35,7 +35,7 @@ public class DetailFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private MovieContent.Movie thisBusiness = MainActivity.currentBusiness;
+    private MovieContent.Movie movie = MainActivity.currentMovie;
 
     public DetailFragment() {
         // Required empty public constructor
@@ -86,7 +86,10 @@ public class DetailFragment extends Fragment {
         this.movieReleaseView = getView().findViewById(R.id.movieRelease);
         this.moviePoster = getView().findViewById(id.moviePoster);
 
-        MovieContent.Movie movie = MainActivity.currentBusiness;
+        MovieContent.Movie movie = MainActivity.currentMovie;
+
+        // TODO set movie poster for each individual movie
+
         // this.moviePoster.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.office, getContext().getTheme()));
 
         this.movieTitleView.setText(movie.getMovieTitle());

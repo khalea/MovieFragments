@@ -48,7 +48,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textSize="24sp"
-                    tools:text="Aritzia" />
+                    tools:text="The Double" />
 
                 <TextView
                     android:id="@+id/item_bio"
