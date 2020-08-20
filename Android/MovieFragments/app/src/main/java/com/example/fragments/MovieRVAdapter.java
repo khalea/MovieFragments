@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.fragments.MovieContent.Movie;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -33,6 +35,7 @@ public class MovieRVAdapter extends RecyclerView.Adapter<MovieRVAdapter.ViewHold
         public final View mView;
         public final TextView movieTitleView;
         public final TextView movieOverviewView;
+        public final ImageView moviePosterView;
         public Movie mItem;
 
         private final ViewHolderListener viewHolderListener;
@@ -44,6 +47,7 @@ public class MovieRVAdapter extends RecyclerView.Adapter<MovieRVAdapter.ViewHold
             // Locate textviews for items in the List
             movieTitleView = (TextView) view.findViewById(R.id.item_name);
             movieOverviewView = (TextView) view.findViewById(R.id.item_bio);
+            moviePosterView = (ImageView) view.findViewById(R.id.imageView);
             // Set/bind viewholderlistener
             this.viewHolderListener = viewHolderListener;
             itemView.findViewById(R.id.item_row).setOnClickListener(this);
@@ -116,6 +120,10 @@ public class MovieRVAdapter extends RecyclerView.Adapter<MovieRVAdapter.ViewHold
         holder.mItem = mValues.get(position);
         holder.movieTitleView.setText(mValues.get(position).getMovieTitle());
         holder.movieOverviewView.setText(mValues.get(position).getMovieOverview());
+        // TODO access movie poster list view
+        Picasso.get()
+                .load(mValues.get(position).getMoviePoster())
+                .into(holder.moviePosterView);
     }
 
     @Override

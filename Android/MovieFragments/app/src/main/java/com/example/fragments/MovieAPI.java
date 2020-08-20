@@ -55,11 +55,11 @@ public class MovieAPI {
                         String movieTitle = movie.get("title").toString();
                         String movieOverview = movie.get("overview").toString();
                         String movieRelease = movie.get("release_date").toString();
+                        String moviePoster = "https://image.tmdb.org/t/p/w500" + movie.get("poster_path").toString();
+
 
                         // TODO Movie Poster
-                        // String moviePosterURL = movie.get("poster_path").toString();
-
-                        MovieContent.addItem(new MovieContent.Movie(movieTitle, movieRelease, movieOverview));
+                        MovieContent.addItem(new MovieContent.Movie(movieTitle, movieRelease, movieOverview, moviePoster));
                     }
 
                 } catch (JSONException jsonError) {

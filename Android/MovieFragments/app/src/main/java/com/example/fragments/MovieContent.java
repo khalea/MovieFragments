@@ -24,33 +24,18 @@ public class MovieContent {
         ITEMS.clear();
     }
 
-    static {
-        ITEMS.add(new Movie("The Double",
-                "2013",
-                "An awkward office drone (Jesse Eisenberg) becomes increasingly unhinged after a charismatic and confident look-alike takes a job at his workplace and seduces the woman (Mia Wasikowska) he desires.")
-        );
-
-        ITEMS.add(new Movie("The Double",
-                "2013",
-                "An awkward office drone (Jesse Eisenberg) becomes increasingly unhinged after a charismatic and confident look-alike takes a job at his workplace and seduces the woman (Mia Wasikowska) he desires.")
-        );
-    }
-
-    // TODO figure out how to load in images
-    // onChangeListener
-
     public static class Movie {
         private String movieTitle;
         private String movieRelease;
         private String movieOverview;
-        // private Image moviePoster;
+        private String moviePoster;
 
         // TODO add image back to constructor
-        public Movie(String movieTitle, String movieRelease, String movieOverview) {
+        public Movie(String movieTitle, String movieRelease, String movieOverview, String moviePoster) {
             this.movieTitle = movieTitle;
             this.movieRelease = movieRelease;
             this.movieOverview = movieOverview;
-            // this.moviePoster = moviePoster;
+            this.moviePoster = moviePoster;
         }
 
         public String getMovieTitle() {
@@ -77,14 +62,13 @@ public class MovieContent {
             this.movieOverview = movieOverview;
         }
 
-        /* public Image getMoviePoster() {
+        public String getMoviePoster() {
             return moviePoster;
         }
 
-        public void setMoviePoster(Image moviePoster) {
+        public void setMoviePoster(String moviePoster) {
             this.moviePoster = moviePoster;
         }
-         */
     }
 
 }
