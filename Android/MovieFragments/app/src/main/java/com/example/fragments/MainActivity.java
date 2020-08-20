@@ -2,6 +2,7 @@ package com.example.fragments;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.app.SearchManager;
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
     private void handleIntent(Intent intent) {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
+
             //use the query to search your data somehow
             Toast.makeText(getBaseContext(), "Query: " + query, Toast.LENGTH_SHORT).show();
             Log.d("Query", "Query: " + query);

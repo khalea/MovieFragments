@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.fragments.R.id;
+import com.squareup.picasso.Picasso;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -90,11 +91,11 @@ public class DetailFragment extends Fragment {
 
         // TODO set movie poster for each individual movie
 
-        // this.moviePoster.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.office, getContext().getTheme()));
-
         this.movieTitleView.setText(movie.getMovieTitle());
         this.movieOverviewView.setText(movie.getMovieOverview());
         this.movieReleaseView.setText(movie.getMovieRelease());
+
+        Picasso.get().load(movie.getMoviePoster()).into(moviePoster);
 
     }
 }
