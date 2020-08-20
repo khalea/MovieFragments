@@ -15,6 +15,8 @@ import android.view.MenuItem;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+// TODO Auto update RecyclerView after receiving results
+
 public class MainActivity extends AppCompatActivity {
 
     // Reference https://developers.themoviedb.org/3/getting-started/search-and-query-for-details
@@ -37,8 +39,6 @@ public class MainActivity extends AppCompatActivity {
                 .beginTransaction() // Starts edit operations on Fragments available to the FragMgr
                 .add(R.id.mainActivityContainer, new MovieFragment(), MovieFragment.class.getSimpleName()) // Add Fragment to activity
                 .commit(); // Schedules commit to main thread queue
-
-        Toast.makeText(getBaseContext(), "Main Activity Started", Toast.LENGTH_LONG).show();
     }
 
     /** Intent Functions/Handlers
@@ -60,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
             Log.d("Query", "Query: " + query);
 
             // TODO Perform GET request, Send Results to MovieContent.ITEMS & Update RV
+            MovieAPI movieAPI = new MovieAPI();
+            movieAPI.find(query, this.getBaseContext());
         }
     }
 

@@ -37,6 +37,7 @@ public class MovieContent {
     }
 
     // TODO figure out how to load in images
+    // onChangeListener
 
     public static class Movie {
         private String movieTitle;
