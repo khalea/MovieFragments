@@ -1,9 +1,14 @@
 package com.example.fragments;
 
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.palette.graphics.Palette;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -94,6 +99,15 @@ public class DetailFragment extends Fragment {
         this.movieReleaseView.setText(movie.getMovieRelease());
 
         Picasso.get().load(movie.getMoviePoster()).into(moviePoster);
+        // Generate palette with dominant color
+        BitmapDrawable bitmapDrawable = (BitmapDrawable) this.moviePoster.getDrawable();
+        Bitmap bitmap = bitmapDrawable.getBitmap();
+        Palette palette = Palette.from(bitmap).generate();
+        int dominantColor = palette.getDarkVibrantColor(0);
+        Log.d("MovieDetail", "Dominant Color: " + dominantColor);
+
+        Color color = Color.valueOf(dominantColor);
+        this.moviePoster.setBackgroundColor(dominantColor);
 
     }
 }
