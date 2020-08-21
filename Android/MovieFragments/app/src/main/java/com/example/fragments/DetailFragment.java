@@ -89,8 +89,6 @@ public class DetailFragment extends Fragment {
 
         MovieContent.Movie movie = MainActivity.currentMovie;
 
-        // TODO set movie poster for each individual movie
-
         this.movieTitleView.setText(movie.getMovieTitle());
         this.movieOverviewView.setText(movie.getMovieOverview());
         this.movieReleaseView.setText(movie.getMovieRelease());

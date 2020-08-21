@@ -62,8 +62,15 @@ public class MainActivity extends AppCompatActivity {
             Log.d("Query", "Query: " + query);
 
             // TODO Perform GET request, Send Results to MovieContent.ITEMS & Update RV
+            MovieContent.clearItems();
             MovieAPI movieAPI = new MovieAPI();
-            movieAPI.find(query, this.getBaseContext());
+            movieAPI.find(query, this.getBaseContext(), 1);
+
+            // Refresh the view
+            getSupportFragmentManager().beginTransaction()
+                    .detach(getSupportFragmentManager().findFragmentByTag(MovieFragment.class.getSimpleName()))
+                    .attach(getSupportFragmentManager().findFragmentByTag(MovieFragment.class.getSimpleName()))
+                    .commit();
         }
     }
 

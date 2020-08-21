@@ -3,6 +3,7 @@ package com.example.fragments;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.bluetooth.BluetoothClass;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -120,7 +121,9 @@ public class MovieRVAdapter extends RecyclerView.Adapter<MovieRVAdapter.ViewHold
         holder.mItem = mValues.get(position);
         holder.movieTitleView.setText(mValues.get(position).getMovieTitle());
         holder.movieOverviewView.setText(mValues.get(position).getMovieOverview());
+
         // TODO access movie poster list view
+
         Picasso.get()
                 .load(mValues.get(position).getMoviePoster())
                 .into(holder.moviePosterView);

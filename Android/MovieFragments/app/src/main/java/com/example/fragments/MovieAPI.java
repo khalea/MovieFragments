@@ -17,22 +17,27 @@ import org.json.JSONObject;
 public class MovieAPI {
     // Add Query String Between These
     private static String baseURL = "https://api.themoviedb.org/3/search/movie?api_key=" + Keys.getTmdbKey() + "&query=";
-    private static String endURL = "&language=en-US&page=1&include_adult=false";
+    private static String endURL = "&language=en-US&page=1&include_adult=false&page=";
+
+    private static String currentQueryString; // Query string withou page -> helps with pagination
+
+    // TODO method loadNextPage() -> appends results of new page to the RecyclerView. How to refresh view?
+
+    private static int currentPage;
+    private static JSONArray resultsArray;
 
     // Constructor
     public MovieAPI() {
     }
 
-    // Assemble Query URL
-    // Send Request
-    // Parse Results (JSON -> MovieContent.Movie)
-    // Add to MovieContent.ITEMS
 
-
-    public void find(String query, final Context context) {
+    public void find(String query, final Context context, int page) {
         // Start RequestQueue
         RequestQueue queue = Volley.newRequestQueue(context);
-        String queryURL = baseURL + query + endURL;
+        String queryURL = baseURL + query + endURL + page;
+
+        MovieAPI.currentPage = page;
+        MovieAPI.currentQueryString = baseURL + query + endURL;
 
         // Request a string response from the provided URL
         StringRequest stringRequest = new StringRequest(Request.Method.GET, queryURL, new Response.Listener<String>() {
@@ -40,26 +45,28 @@ public class MovieAPI {
             public void onResponse(String response) {
                 Log.d("API", "Response: " + response.substring(0, response.length()/2));
 
-                MovieContent.clearItems();
-
                 try {
                     // Make a JSON obj, send results to MovieContent.ITEMS
-                    JSONObject resultsObject = new JSONObject(response);
-                    JSONArray resultsArray = resultsObject.getJSONArray("results");
+                    resultsArray = new JSONObject(response).getJSONArray("results");
                     for (int i = 0; i < resultsArray.length(); i++) {
                         JSONObject movie = resultsArray.getJSONObject(i);
 
-                        Log.d("API", movie.get("title").toString());
+                        // Only add if there is a poster & description
+                        // TODO only eliminates results w/o overview, but not without images
+                        if ((!movie.get("overview").toString().isEmpty()) && (!movie.get("poster_path").toString().isEmpty())) {
 
-                        // String movieID = movie.get("id").toString();
-                        String movieTitle = movie.get("title").toString();
-                        String movieOverview = movie.get("overview").toString();
-                        String movieRelease = movie.get("release_date").toString();
-                        String moviePoster = "https://image.tmdb.org/t/p/w500" + movie.get("poster_path").toString();
+                            Log.d("API", movie.get("title").toString());
+
+                            // String movieID = movie.get("id").toString();
+                            String movieTitle = movie.get("title").toString();
+                            String movieOverview = movie.get("overview").toString();
+                            String movieRelease = movie.get("release_date").toString();
+                            String moviePoster = "https://image.tmdb.org/t/p/w500" + movie.get("poster_path").toString();
 
 
-                        // TODO Movie Poster
-                        MovieContent.addItem(new MovieContent.Movie(movieTitle, movieRelease, movieOverview, moviePoster));
+                            // TODO Movie Poster
+                            MovieContent.addItem(new MovieContent.Movie(movieTitle, movieRelease, movieOverview, moviePoster));
+                        }
                     }
 
                 } catch (JSONException jsonError) {
@@ -78,5 +85,17 @@ public class MovieAPI {
         queue.add(stringRequest);
     }
 
+    public void loadNextPage() {
 
+    }
+
+
+    // Helps with pagination
+    public static void setCurrentPage(int nextPage) {
+        MovieAPI.currentPage = nextPage;
+    }
+
+    public static int getCurrentPage() {
+        return currentPage;
+    }
 }

@@ -3,6 +3,7 @@ package com.example.fragments;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 /**
  * A fragment representing a list of Items.
@@ -61,10 +63,24 @@ public class MovieFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
             recyclerView.setAdapter(new MovieRVAdapter(MovieContent.getITEMS(), this));
+            // TODO Pagination when scrolling
+            recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                    super.onScrollStateChanged(recyclerView, newState);
+                    if (!recyclerView.canScrollVertically(1)) {
+                        Toast.makeText(getContext(), "RecyclerView: Cannot scroll further", Toast.LENGTH_SHORT).show();
+                        // TODO load more results if there is > 1 pages
+
+                    }
+                }
+            });
         }
 
         //
 
         return view;
     }
+
+
 }
