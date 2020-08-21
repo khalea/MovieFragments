@@ -16,6 +16,8 @@ import android.view.MenuItem;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import java.util.Objects;
+
 // TODO Auto update RecyclerView after receiving results
 
 public class MainActivity extends AppCompatActivity {
@@ -68,8 +70,8 @@ public class MainActivity extends AppCompatActivity {
 
             // Refresh the view
             getSupportFragmentManager().beginTransaction()
-                    .detach(getSupportFragmentManager().findFragmentByTag(MovieFragment.class.getSimpleName()))
-                    .attach(getSupportFragmentManager().findFragmentByTag(MovieFragment.class.getSimpleName()))
+                    .detach(Objects.requireNonNull(getSupportFragmentManager().findFragmentByTag(MovieFragment.class.getSimpleName())))
+                    .attach(Objects.requireNonNull(getSupportFragmentManager().findFragmentByTag(MovieFragment.class.getSimpleName())))
                     .commit();
         }
     }
