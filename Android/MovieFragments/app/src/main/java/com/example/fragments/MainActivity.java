@@ -9,6 +9,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.SearchRecentSuggestions;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -42,6 +43,10 @@ public class MainActivity extends AppCompatActivity {
                 .beginTransaction() // Starts edit operations on Fragments available to the FragMgr
                 .add(R.id.mainActivityContainer, new MovieFragment(), MovieFragment.class.getSimpleName()) // Add Fragment to activity
                 .commit(); // Schedules commit to main thread queue
+
+        SearchRecentSuggestions suggestions = new SearchRecentSuggestions(this,
+                SuggestionProvider.AUTHORITY, SuggestionProvider.MODE);
+        suggestions.clearHistory();
     }
 
     /** Intent Functions/Handlers
@@ -73,6 +78,10 @@ public class MainActivity extends AppCompatActivity {
                     .detach(Objects.requireNonNull(getSupportFragmentManager().findFragmentByTag(MovieFragment.class.getSimpleName())))
                     .attach(Objects.requireNonNull(getSupportFragmentManager().findFragmentByTag(MovieFragment.class.getSimpleName())))
                     .commit();
+
+            // Save search suggestions
+            SearchRecentSuggestions suggestions = new SearchRecentSuggestions(this, SuggestionProvider.AUTHORITY, SuggestionProvider.MODE);
+            suggestions.saveRecentQuery(query, null);
         }
     }
 
