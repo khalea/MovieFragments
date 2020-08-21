@@ -48,7 +48,7 @@
                     android:layout_weight="1"
                     android:fontFamily="sans-serif-medium"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:textSize="24sp"
+                    android:textSize="22sp"
                     tools:text="The Double" />
 
                 <TextView
