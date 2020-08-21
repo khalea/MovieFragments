@@ -16,6 +16,6 @@
 
 - [X] Load in movie posters
 - [ ] Add pagination for results
-- [ ] Auto-refresh RecyclerView
+- [X] Auto-refresh RecyclerView
 - [ ] Search autocomplete
 - [ ] Interaction/animation/notif when no results are found
