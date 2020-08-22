@@ -28,15 +28,20 @@ public class MovieContent {
         private String movieTitle;
         private String movieRelease;
         private String movieOverview;
-        private String moviePoster;
+        private String moviePoster = null;
+        private float movieRating;
 
         // TODO add image back to constructor
-        public Movie(String movieTitle, String movieRelease, String movieOverview, String moviePoster) {
+        public Movie(String movieTitle, String movieRelease, String movieOverview, String moviePoster, float movieRating) {
             this.movieTitle = movieTitle;
             this.movieRelease = movieRelease;
             this.movieOverview = movieOverview;
             this.moviePoster = moviePoster;
+            this.movieRating = movieRating;
         }
+
+
+        // Getters/Setters
 
         public String getMovieTitle() {
             return movieTitle;
@@ -68,6 +73,14 @@ public class MovieContent {
 
         public void setMoviePoster(String moviePoster) {
             this.moviePoster = moviePoster;
+        }
+
+        public float getMovieRating() {
+            return movieRating;
+        }
+
+        public void setMovieRating(float movieRating) {
+            this.movieRating = movieRating;
         }
     }
 
