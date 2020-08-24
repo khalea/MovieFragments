@@ -29,11 +29,14 @@ public class MainActivity extends AppCompatActivity {
 
     public static int currentPosn;
     public static MovieContent.Movie currentMovie;
+    public static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        context = this.getBaseContext();
 
         // Reference AndroidX FragmentTransaction, FragmentManager
         // FragmentManager helps add/remove/swap fragments from the Activity's ViewGroup
@@ -69,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
             Log.d("Query", "Query: " + query);
 
             // TODO Perform GET request, Send Results to MovieContent.ITEMS & Update RV
-            MovieContent.clearItems();
             MovieAPI movieAPI = new MovieAPI();
             movieAPI.find(query, this.getBaseContext(), 1);
 

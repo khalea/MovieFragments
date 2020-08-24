@@ -123,10 +123,24 @@ public class MovieRVAdapter extends RecyclerView.Adapter<MovieRVAdapter.ViewHold
         holder.movieOverviewView.setText(mValues.get(position).getMovieOverview());
 
         // TODO access movie poster list view
+<<<<<<< Updated upstream
 
         Picasso.get()
                 .load(mValues.get(position).getMoviePoster())
                 .into(holder.moviePosterView);
+=======
+        if (!(mValues.get(position).getMoviePoster().equals("https://image.tmdb.org/t/p/w500null"))) {
+            Picasso.get()
+                    .load(mValues.get(position).getMoviePoster())
+                    .into(holder.moviePosterView);
+        } else { // TODO fix default image not showing up (or showing up too large without fit, centercrop)
+            Picasso.get()
+                    .load(R.drawable.movie)
+                    .fit()
+                    .centerCrop()
+                    .into(holder.moviePosterView);
+        }
+>>>>>>> Stashed changes
     }
 
     @Override
