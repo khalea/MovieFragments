@@ -18,4 +18,5 @@
 - [ ] Add pagination for results
 - [X] Auto-refresh RecyclerView
 - [ ] Search autocomplete
+- [X] Search history
 - [ ] Interaction/animation/notif when no results are found

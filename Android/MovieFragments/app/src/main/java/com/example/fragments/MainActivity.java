@@ -50,7 +50,10 @@ public class MainActivity extends AppCompatActivity {
         SearchRecentSuggestions suggestions = new SearchRecentSuggestions(this,
                 SuggestionProvider.AUTHORITY, SuggestionProvider.MODE);
         suggestions.clearHistory();
+
+
     }
+
 
     /** Intent Functions/Handlers
      * REFERENCE https://developer.android.com/training/search/setup#create-sc
@@ -87,8 +90,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // Options Menu & Item Handlers
 
+
+    // Options Menu & Item Handlers
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the options menu from XML

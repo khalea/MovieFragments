@@ -19,7 +19,9 @@ public class MovieAPI {
     private static String baseURL = "https://api.themoviedb.org/3/search/movie?api_key=" + Keys.getTmdbKey() + "&query=";
     private static String endURL = "&language=en-US&page=1&include_adult=false&page=";
 
-    private static String currentQueryString; // Query string withou page -> helps with pagination
+    private static String trendURL = "https://api.themoviedb.org/3/trending/all/day?api_key=" + Keys.getTmdbKey();
+
+    private static String currentQueryString; // Query string without page -> helps with pagination
 
     // TODO method loadNextPage() -> appends results of new page to the RecyclerView. How to refresh view?
 
@@ -62,19 +64,21 @@ public class MovieAPI {
 
                         // Only add if there is a poster & description
                         // TODO only eliminates results w/o overview, but not without images
-                        if ((!movie.get("overview").toString().isEmpty()) && (!movie.get("poster_path").toString().isEmpty())) {
+                        if ((! (movie.get("overview") == null)) || (! (movie.get("poster_path") == null) )) {
 
                             Log.d("API", movie.get("title").toString());
 
-                            // String movieID = movie.get("id").toString();
+                            // Movie Details
                             String movieTitle = movie.get("title").toString();
                             String movieOverview = movie.get("overview").toString();
                             String movieRelease = movie.get("release_date").toString();
+                            float movieRating = (float) Float.parseFloat(movie.get("vote_average").toString());
+
+                            // Poster & Backdrop
                             String moviePoster = "https://image.tmdb.org/t/p/w500" + movie.get("poster_path").toString();
 
-
-                            // TODO Movie Poster
-                            MovieContent.addItem(new MovieContent.Movie(movieTitle, movieRelease, movieOverview, moviePoster));
+                            // Add Movie to MovieContent.ITEMS
+                            MovieContent.addItem(new MovieContent.Movie(movieTitle, movieRelease, movieOverview, moviePoster, movieRating));
                         }
                     }
 
@@ -94,10 +98,10 @@ public class MovieAPI {
         queue.add(stringRequest);
     }
 
+    // TODO Pagination
     public void loadNextPage() {
 
     }
-
 
     // Helps with pagination
     public static void setCurrentPage(int nextPage) {

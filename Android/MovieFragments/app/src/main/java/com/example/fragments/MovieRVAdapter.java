@@ -1,14 +1,23 @@
 package com.example.fragments;
 
 import androidx.fragment.app.Fragment;
+import androidx.palette.graphics.Palette;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.bluetooth.BluetoothClass;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.example.fragments.MovieContent.Movie;
@@ -34,10 +43,13 @@ public class MovieRVAdapter extends RecyclerView.Adapter<MovieRVAdapter.ViewHold
     // RVAdapters should implement ViewHolder & add fields to cache View.findviewbyid results
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public final View mView;
+        public Movie mItem;
+
         public final TextView movieTitleView;
         public final TextView movieOverviewView;
         public final ImageView moviePosterView;
-        public Movie mItem;
+        public final RatingBar ratingBar;
+
 
         private final ViewHolderListener viewHolderListener;
 
@@ -49,6 +61,7 @@ public class MovieRVAdapter extends RecyclerView.Adapter<MovieRVAdapter.ViewHold
             movieTitleView = (TextView) view.findViewById(R.id.item_name);
             movieOverviewView = (TextView) view.findViewById(R.id.item_bio);
             moviePosterView = (ImageView) view.findViewById(R.id.imageView);
+            ratingBar = (RatingBar) view.findViewById(R.id.ratingBar);
             // Set/bind viewholderlistener
             this.viewHolderListener = viewHolderListener;
             itemView.findViewById(R.id.item_row).setOnClickListener(this);
@@ -121,6 +134,8 @@ public class MovieRVAdapter extends RecyclerView.Adapter<MovieRVAdapter.ViewHold
         holder.mItem = mValues.get(position);
         holder.movieTitleView.setText(mValues.get(position).getMovieTitle());
         holder.movieOverviewView.setText(mValues.get(position).getMovieOverview());
+        holder.ratingBar.setNumStars(5);
+        holder.ratingBar.setRating((float) mValues.get(position).getMovieRating()/2);
 
         // TODO access movie poster list view
 
@@ -136,6 +151,8 @@ public class MovieRVAdapter extends RecyclerView.Adapter<MovieRVAdapter.ViewHold
                     .into(holder.moviePosterView);
         }
     }
+
+
 
     @Override
     public int getItemCount() {

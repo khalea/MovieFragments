@@ -1,13 +1,19 @@
 package com.example.fragments;
 
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.palette.graphics.Palette;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.example.fragments.R.id;
@@ -24,6 +30,7 @@ public class DetailFragment extends Fragment {
     TextView movieTitleView;
     TextView movieOverviewView;
     TextView movieReleaseView;
+    RatingBar detailRatingBar;
 
     MovieContent.Movie biz;
 
@@ -82,18 +89,39 @@ public class DetailFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+
+        // References for movie attribute views
         this.movieTitleView = getView().findViewById(R.id.movieTitle);
         this.movieOverviewView = getView().findViewById(R.id.movieOverview);
         this.movieReleaseView = getView().findViewById(R.id.movieRelease);
         this.moviePoster = getView().findViewById(id.moviePoster);
+        this.detailRatingBar = getView().findViewById(id.detailRatingBar);
+
 
         MovieContent.Movie movie = MainActivity.currentMovie;
 
+        // Set values for views
         this.movieTitleView.setText(movie.getMovieTitle());
         this.movieOverviewView.setText(movie.getMovieOverview());
         this.movieReleaseView.setText(movie.getMovieRelease());
+        this.detailRatingBar.setNumStars(5);
+        this.detailRatingBar.setRating((float) movie.getMovieRating()/2);
 
-        Picasso.get().load(movie.getMoviePoster()).into(moviePoster);
+        // Check if movie has a poster
+        Log.d("Detail", "Poster Path: " + movie.getMoviePoster());
+
+        if (! (movie.getMoviePoster().equals("https://image.tmdb.org/t/p/w500null"))) {
+
+            Picasso.get().load(movie.getMoviePoster()).into(moviePoster);
+            // Generate palette with dominant color
+            BitmapDrawable bitmapDrawable = (BitmapDrawable) this.moviePoster.getDrawable();
+            Bitmap bitmap = bitmapDrawable.getBitmap();
+            Palette palette = Palette.from(bitmap).generate();
+            int dominantColor = palette.getDarkVibrantColor(0);
+
+            Color color = Color.valueOf(dominantColor);
+            this.moviePoster.setBackgroundColor(dominantColor);
+        }
 
     }
 }
