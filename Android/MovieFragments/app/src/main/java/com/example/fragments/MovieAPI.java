@@ -32,6 +32,10 @@ public class MovieAPI {
     public MovieAPI() {
     }
 
+    public static String getCurrentQuery() {
+        return MovieAPI.currentQueryString;
+    }
+
 
     public void find(String query, final Context context, int page) {
         // Start RequestQueue
@@ -40,6 +44,11 @@ public class MovieAPI {
 
         MovieAPI.currentPage = page;
         MovieAPI.currentQueryString = baseURL + query + endURL;
+
+        // Don't clear list if page > 1
+        if (page == 1) {
+            MovieContent.clearItems();
+        }
 
         // Request a string response from the provided URL
         StringRequest stringRequest = new StringRequest(Request.Method.GET, queryURL, new Response.Listener<String>() {
