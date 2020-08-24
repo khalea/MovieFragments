@@ -17,7 +17,7 @@
 - [ ] First batch of search results loads in twice (verified in logcat)
 - [ ] Searches with 1 page of results will scroll infinitely (add check on "total_pages")
 
-### Remaining TODOs (Aug 20)
+### Remaining TODOs
 
 - [X] Load in movie posters
 - [X] Add pagination for results
