@@ -134,7 +134,8 @@ public class MovieRVAdapter extends RecyclerView.Adapter<MovieRVAdapter.ViewHold
         holder.mItem = mValues.get(position);
         holder.movieTitleView.setText(mValues.get(position).getMovieTitle());
         holder.movieOverviewView.setText(mValues.get(position).getMovieOverview());
-        holder.ratingBar.setNumStars((int) mValues.get(position).getMovieRating());
+        holder.ratingBar.setNumStars(5);
+        holder.ratingBar.setRating((float) mValues.get(position).getMovieRating()/2);
 
         // TODO access movie poster list view
 

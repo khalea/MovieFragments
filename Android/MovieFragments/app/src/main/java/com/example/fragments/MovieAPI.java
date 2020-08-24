@@ -19,7 +19,9 @@ public class MovieAPI {
     private static String baseURL = "https://api.themoviedb.org/3/search/movie?api_key=" + Keys.getTmdbKey() + "&query=";
     private static String endURL = "&language=en-US&page=1&include_adult=false&page=";
 
-    private static String currentQueryString; // Query string withou page -> helps with pagination
+    private static String trendURL = "https://api.themoviedb.org/3/trending/all/day?api_key=" + Keys.getTmdbKey();
+
+    private static String currentQueryString; // Query string without page -> helps with pagination
 
     // TODO method loadNextPage() -> appends results of new page to the RecyclerView. How to refresh view?
 
@@ -61,7 +63,7 @@ public class MovieAPI {
                             String movieTitle = movie.get("title").toString();
                             String movieOverview = movie.get("overview").toString();
                             String movieRelease = movie.get("release_date").toString();
-                            float movieRating = (float) Math.floor(Float.parseFloat(movie.get("vote_average").toString()) / 2);
+                            float movieRating = (float) Float.parseFloat(movie.get("vote_average").toString());
 
                             // Poster & Backdrop
                             String moviePoster = "https://image.tmdb.org/t/p/w500" + movie.get("poster_path").toString();

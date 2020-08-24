@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.example.fragments.R.id;
@@ -29,6 +30,7 @@ public class DetailFragment extends Fragment {
     TextView movieTitleView;
     TextView movieOverviewView;
     TextView movieReleaseView;
+    RatingBar detailRatingBar;
 
     MovieContent.Movie biz;
 
@@ -88,18 +90,22 @@ public class DetailFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
+        // References for movie attribute views
         this.movieTitleView = getView().findViewById(R.id.movieTitle);
         this.movieOverviewView = getView().findViewById(R.id.movieOverview);
         this.movieReleaseView = getView().findViewById(R.id.movieRelease);
         this.moviePoster = getView().findViewById(id.moviePoster);
+        this.detailRatingBar = getView().findViewById(id.detailRatingBar);
 
-        // TODO add movieRating
 
         MovieContent.Movie movie = MainActivity.currentMovie;
 
+        // Set values for views
         this.movieTitleView.setText(movie.getMovieTitle());
         this.movieOverviewView.setText(movie.getMovieOverview());
         this.movieReleaseView.setText(movie.getMovieRelease());
+        this.detailRatingBar.setNumStars(5);
+        this.detailRatingBar.setRating((float) movie.getMovieRating()/2);
 
         // Check if movie has a poster
         Log.d("Detail", "Poster Path: " + movie.getMoviePoster());
