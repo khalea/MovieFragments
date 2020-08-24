@@ -38,22 +38,25 @@ public class MainActivity extends AppCompatActivity {
 
         context = this.getBaseContext();
 
+        MovieAPI movieAPI = new MovieAPI();
+        movieAPI.loadTrending(this.getBaseContext());
+
+
         // Reference AndroidX FragmentTransaction, FragmentManager
         // FragmentManager helps add/remove/swap fragments from the Activity's ViewGroup
         // It is an interface for interacting with Fragments within an activity
         FragmentManager fragmentManager = getSupportFragmentManager(); // getSupport.. grabs FragMgr to help with interacting w frags
         fragmentManager
                 .beginTransaction() // Starts edit operations on Fragments available to the FragMgr
-                .add(R.id.mainActivityContainer, new MovieFragment(), MovieFragment.class.getSimpleName()) // Add Fragment to activity
+                .add(R.id.mainActivityContainer, new FeaturedFragment(), FeaturedFragment.class.getSimpleName()) // Add Fragment to activity
                 .commit(); // Schedules commit to main thread queue
+
 
         SearchRecentSuggestions suggestions = new SearchRecentSuggestions(this,
                 SuggestionProvider.AUTHORITY, SuggestionProvider.MODE);
         suggestions.clearHistory();
 
-
     }
-
 
     /** Intent Functions/Handlers
      * REFERENCE https://developer.android.com/training/search/setup#create-sc
@@ -78,10 +81,11 @@ public class MainActivity extends AppCompatActivity {
             MovieAPI movieAPI = new MovieAPI();
             movieAPI.find(query, this.getBaseContext(), 1);
 
+
             // Refresh the view
             getSupportFragmentManager().beginTransaction()
-                    .detach(Objects.requireNonNull(getSupportFragmentManager().findFragmentByTag(MovieFragment.class.getSimpleName())))
-                    .attach(Objects.requireNonNull(getSupportFragmentManager().findFragmentByTag(MovieFragment.class.getSimpleName())))
+                    .detach(getSupportFragmentManager().findFragmentByTag(FeaturedFragment.class.getSimpleName())) // Works
+                    .add(R.id.mainActivityContainer, new MovieFragment(), MovieFragment.class.getSimpleName())
                     .commit();
 
             // Save search suggestions

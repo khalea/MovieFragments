@@ -49,8 +49,7 @@ public class MovieRVAdapter extends RecyclerView.Adapter<MovieRVAdapter.ViewHold
         public final TextView movieOverviewView;
         public final ImageView moviePosterView;
         public final RatingBar ratingBar;
-
-
+        // Listener for Clicks
         private final ViewHolderListener viewHolderListener;
 
         // ViewHolder constructor
@@ -96,9 +95,8 @@ public class MovieRVAdapter extends RecyclerView.Adapter<MovieRVAdapter.ViewHold
             // Update position in MainActivity
             MainActivity.currentPosn = adapterPosition;
             MainActivity.currentMovie = movies.get(adapterPosition);
-            // On Click, open a new DetailView for the given Movie
-            // TODO pass data into new detail view
 
+            // On Click, open a new DetailView for the given Movie
             DetailFragment detail = new DetailFragment();
             Bundle args = new Bundle();
             args.putString("Movie", String.valueOf(movies.get(MainActivity.currentPosn)));

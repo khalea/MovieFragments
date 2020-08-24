@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/featuredItemCard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="0dp"
+    android:background="#00FFFFFF"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="267dp"
+        android:layout_height="392dp"
+        android:layout_marginBottom="8dp"
+        app:cardBackgroundColor="#00FFFFFF"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp">
+
+        <ImageView
+            android:id="@+id/ftMovieImage"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:background="#00FFFFFF"
+            app:srcCompat="@drawable/thedouble" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/ftMovieTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="sans-serif-black"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:textColor="#3E3E3E"
+        android:textSize="24sp"
+        tools:text="The Double" />
+
+    <RatingBar
+        android:id="@+id/ftRatingBar"
+        style="@android:style/Widget.Material.RatingBar.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_weight="1"
+        android:indeterminate="false"
+        android:isIndicator="true"
+        android:numStars="5"
+        android:progressTint="#FFA726"
+        android:rating="3.5"
+        android:secondaryProgressTint="#FFA726"
+        android:stepSize=".1" />
+
+    <TextView
+        android:id="@+id/ftMovieOverview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="48dp"
+        android:textAppearance="?attr/textAppearanceListItem"
+        tools:text="XYZ" />
+
+</LinearLayout>

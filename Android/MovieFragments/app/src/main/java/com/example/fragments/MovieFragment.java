@@ -66,7 +66,8 @@ public class MovieFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
             recyclerView.setAdapter(new MovieRVAdapter(MovieContent.getITEMS(), this));
-            // TODO Pagination when scrolling
+
+            // Pagination when scrolling
             recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
                 @Override
                 public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -81,7 +82,7 @@ public class MovieFragment extends Fragment {
                                 .attach(Objects.requireNonNull(getFragmentManager().findFragmentByTag(MovieFragment.class.getSimpleName())))
                                 .commit();
 
-                        Toast.makeText(getContext(), "Loaded more results!", Toast.LENGTH_SHORT);
+                        Toast.makeText(getContext(), "Loaded more results!", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
