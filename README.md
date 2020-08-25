@@ -2,6 +2,10 @@
 
 *Android dummy app using lists, fragments, TMDB api, etc*
 
+### Demo
+
+<img src="/Android/MovieFragments/MoviesApp.gif" width="360" height="640"/>
+
 ### Intro & Components
 
 - RecyclerView + MovieRVAdapter -> The list & respective adapter that handles binding & displaying data in their respective rows.
