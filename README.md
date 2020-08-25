@@ -1,6 +1,6 @@
 # MovieFragments
 
-* Super basic Android app using lists, fragments, and the TMDB api to search for movies.*
+This is a basic (my first, yay!) Android app using lists, fragments, and the TMDB api to search for movies.
 
 ### Demo
 
